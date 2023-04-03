@@ -23,7 +23,7 @@ class YouTubeVIS(_BaseDataset):
             'CLASSES_TO_EVAL': None,  # Classes to eval (if None, all classes)
             'SPLIT_TO_EVAL': 'train_sub_split',  # Valid: 'train', 'val', 'train_sub_split'
             'PRINT_CONFIG': True,  # Whether to print current config
-            'OUTPUT_SUB_FOLDER': '',  # Output files are saved in OUTPUT_FOLDER/tracker_name/OUTPUT_SUB_FOLDER
+            'OUTPUT_SUB_FOLDER': 'results',  # Output files are saved in OUTPUT_FOLDER/tracker_name/OUTPUT_SUB_FOLDER
             'TRACKER_SUB_FOLDER': 'data',  # Tracker files are in TRACKER_FOLDER/tracker_name/TRACKER_SUB_FOLDER
             'TRACKER_DISPLAY_NAMES': None,  # Names of trackers to display, if None: TRACKERS_TO_EVAL
         }
