@@ -12,6 +12,7 @@ try:
 except ImportError as err:
     print(f"Error importing BURST due to missing underlying dependency: {err}")
 from .youtube_vis import YouTubeVIS
+from .skydata import Skydata
 from .head_tracking_challenge import HeadTrackingChallenge
 from .rob_mots import RobMOTS
 from .person_path_22 import PersonPath22
