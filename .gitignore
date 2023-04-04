@@ -13,4 +13,4 @@ data
 .idea
 error_log.txt
 venv
-
+*.json
