@@ -123,7 +123,7 @@ class Evaluator:
                         res['COMBINED_SEQ'][c_cls] = {}
                         for metric, metric_name in zip(metrics_list, metric_names):
                             curr_res = {seq_key: seq_value[c_cls][metric_name] for seq_key, seq_value in res.items() if
-                                        seq_key != 'COMBINED_SEQ'}
+                                        (seq_key != 'COMBINED_SEQ' and seq_value!={}) }
                             res['COMBINED_SEQ'][c_cls][metric_name] = metric.combine_sequences(curr_res)
                     # combine classes
                     if dataset.should_classes_combine:
@@ -163,7 +163,7 @@ class Evaluator:
                                     table_res = {'COMBINED_SEQ': res['COMBINED_SEQ'][c_cls][metric_name]}
                                 else:
                                     table_res = {seq_key: seq_value[c_cls][metric_name] for seq_key, seq_value
-                                                 in res.items()}
+                                                 in res.items() if  seq_value!={} }
 
                                 if config['PRINT_RESULTS'] and config['PRINT_ONLY_COMBINED']:
                                     dont_print = dataset.should_classes_combine and c_cls not in combined_cls_keys
@@ -216,6 +216,10 @@ def eval_sequence(seq, dataset, tracker, class_list, metrics_list, metric_names)
     """Function for evaluating a single sequence"""
 
     raw_data = dataset.get_raw_seq_data(tracker, seq)
+    if(raw_data is None):
+        #print('No data for sequence %s' % seq)
+        return {}
+    
     seq_res = {}
     for cls in class_list:
         seq_res[cls] = {}

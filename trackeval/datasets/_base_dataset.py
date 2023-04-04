@@ -91,10 +91,19 @@ class _BaseDataset(ABC):
         # Load raw data.
         raw_gt_data = self._load_raw_file(tracker, seq, is_gt=True)
         raw_tracker_data = self._load_raw_file(tracker, seq, is_gt=False)
+
+        if(raw_gt_data is None or raw_tracker_data is None):
+            return None
+        
         raw_data = {**raw_tracker_data, **raw_gt_data}  # Merges dictionaries
 
         # Calculate similarities for each timestep.
         similarity_scores = []
+
+        # print("raw_data['gt_dets']:", len(raw_data['gt_dets']))
+        # print("raw_data['tracker_dets']:", len(raw_data['tracker_dets']))
+
+        # input("Press Enter to continue...")
         for t, (gt_dets_t, tracker_dets_t) in enumerate(zip(raw_data['gt_dets'], raw_data['tracker_dets'])):
             ious = self._calculate_similarities(gt_dets_t, tracker_dets_t)
             similarity_scores.append(ious)
@@ -234,6 +243,18 @@ class _BaseDataset(ABC):
         if not is_encoded:
             masks1 = mask_utils.encode(np.array(np.transpose(masks1, (1, 2, 0)), order='F'))
             masks2 = mask_utils.encode(np.array(np.transpose(masks2, (1, 2, 0)), order='F'))
+
+        #inspect masks
+        
+        # input("Inpecting mask Enter to continue...")
+        # print(masks2)
+
+        # input("Inpecting mask Enter to continue...")
+        # print(masks1)
+
+        # input("Inpecting mask Enter to continue...")
+
+            
 
         # use pycocotools for iou computation of rle encoded masks
         ious = mask_utils.iou(masks1, masks2, [do_ioa]*len(masks2))

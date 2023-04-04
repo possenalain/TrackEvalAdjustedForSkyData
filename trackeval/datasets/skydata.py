@@ -140,7 +140,9 @@ class Skydata(_BaseDataset):
         if is_gt:
             tracks = [ann for ann in self.gt_data['annotations'] if ann['video_id'] == seq_id]
         else:
+            #print("loading tracker data")
             tracks = self._get_tracker_seq_tracks(tracker, seq_id)
+            
 
         # Convert data to required format
         num_timesteps = self.seq_lengths[seq_id]
@@ -148,9 +150,19 @@ class Skydata(_BaseDataset):
         if not is_gt:
             data_keys += ['tracker_confidences']
         raw_data = {key: [None] * num_timesteps for key in data_keys}
+
+        if(len(tracks) == 0):
+            return None
+        
         for t in range(num_timesteps):
-            print("total timesteps: ", num_timesteps, "current timestep: ", t, "")
-            raw_data['dets'][t] = [track['segmentations'][t] for track in tracks if track['segmentations'][t]]
+            #print("total timesteps: ", num_timesteps, "current timestep: ", t, "")
+            if(is_gt):
+                raw_data['dets'][t] = [track['segmentations'][t][0] for track in tracks if track['segmentations'][t]]
+            else:
+                # raw_data['dets'][t] = [track['segmentations'][t] for track in tracks if track['segmentations'][t]]
+                raw_data['dets'][t] = [ {"counts": track['segmentations'][t]["counts"].encode("utf-8"), "size":track['segmentations'][t]["size"]} for track in tracks if track['segmentations'][t]]
+               
+
             raw_data['ids'][t] = np.atleast_1d([track['id'] for track in tracks
                                                 if track['segmentations'][t]]).astype(int)
             raw_data['classes'][t] = np.atleast_1d([track['category_id'] for track in tracks
@@ -174,9 +186,19 @@ class Skydata(_BaseDataset):
         classes_to_tracks = {cls: [track for track in tracks if track['category_id'] == cls] for cls in all_cls_ids}
 
         # mapping from classes to track representations and track information
-        raw_data['classes_to_tracks'] = {cls: [{i: track['segmentations'][i]
-                                                for i in range(len(track['segmentations']))} for track in tracks]
-                                         for cls, tracks in classes_to_tracks.items()}
+        if(is_gt):
+            def squeeze_gt_det(ddd):
+                if (ddd):
+                    return ddd[0]
+                return ddd
+            
+            raw_data['classes_to_tracks'] = {cls: [{i: squeeze_gt_det(track['segmentations'][i])
+                                                                for i in range(len(track['segmentations']))} for track in tracks]
+                                                        for cls, tracks in classes_to_tracks.items()}
+        else:
+            raw_data['classes_to_tracks'] = {cls: [{i: track['segmentations'][i]
+                                                    for i in range(len(track['segmentations']))} for track in tracks]
+                                            for cls, tracks in classes_to_tracks.items()}
         raw_data['classes_to_track_ids'] = {cls: [track['id'] for track in tracks]
                                             for cls, tracks in classes_to_tracks.items()}
         raw_data['classes_to_track_areas'] = {cls: [track['area'] for track in tracks]
@@ -245,7 +267,7 @@ class Skydata(_BaseDataset):
         unique_tracker_ids = []
         num_gt_dets = 0
         num_tracker_dets = 0
-
+        #TODO: ...............
         for t in range(raw_data['num_timesteps']):
 
             # Only extract relevant dets for this class for eval (cls)
@@ -321,6 +343,15 @@ class Skydata(_BaseDataset):
         return data
 
     def _calculate_similarities(self, gt_dets_t, tracker_dets_t):
+                
+        # input("Inpecting mask Enter to continue...")
+        # print(gt_dets_t)
+
+        # input("Inpecting mask Enter to continue...")
+        # print(tracker_dets_t)
+
+        # input("Inpecting mask Enter to continue...")
+
         similarity_scores = self._calculate_mask_ious(gt_dets_t, tracker_dets_t, is_encoded=True, do_ioa=False)
         return similarity_scores
 
@@ -385,6 +416,16 @@ class Skydata(_BaseDataset):
         # only loaded when needed to reduce minimum requirements
         from pycocotools import mask as mask_utils
 
+        # print("------------------------------------------------------------")
+        # print("loaded tracker data for tracker: ",tracker)
+        # # print("tracker data: ",self.tracker_data[tracker])
+        # print("sequence id: ",seq_id)
+        # print("existing tracker videos: ",[v['video_id'] for v in self.tracker_data[tracker]])
+      
+        # print("------------------------------------------------------------")
+
+        # input("Press Enter to continue...")
+
         tracks = [ann for ann in self.tracker_data[tracker] if ann['video_id'] == seq_id]
         for track in tracks:
             track['areas'] = []
@@ -400,6 +441,8 @@ class Skydata(_BaseDataset):
                 track['area'] = np.array(areas).mean()
             track['id'] = self.global_tid_counter
             self.global_tid_counter += 1
+        # print("number of tracks: ",len(tracks))
+
         return tracks
 
 
