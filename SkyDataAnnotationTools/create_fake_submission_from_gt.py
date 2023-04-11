@@ -19,7 +19,7 @@ def defaultEncoder(obj):
 
 class SkyDataDataset():
 
-    def __init__(self, dataset_path="./SkyDataAnnotationTools/gt_files/",gt_filename="train_SKYVOS.json"):
+    def __init__(self, dataset_path="./gt_files/",gt_filename="train_SKYVOS.json"):
         self.gt_fol = dataset_path
         self.sampled_fake_submission = []
 
@@ -74,7 +74,7 @@ class SkyDataDataset():
                 break
     
     def save_fake_submission(self, n=20):
-        filename=f"./SkyDataAnnotationTools/fake_submission_from_gt_{n}.json"
+        filename=f"./gt_files/fake_submission_from_gt_{n}.json"
         with open(filename, 'w') as f:
             json.dump(self.sampled_fake_submission, f,default=defaultEncoder)
 
