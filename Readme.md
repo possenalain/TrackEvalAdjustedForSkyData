@@ -15,7 +15,7 @@ Depending on the capacity you can increase the test file size.
 
 ### Usage
 
-download the SkyData annotations  from the [train_SKYVOS.json](https://www.skydata.ai/) and place the annotations in the folder `SkyDataAnnotationTools/gt_files/`
+download the SkyData annotations  from the [train_SKYVOS.json](https://drive.google.com/drive/folders/1TjyGmMsLRCY44EZbhvwA2_rbdu7orkzE?usp=sharing) and place the annotations in the folder `SkyDataAnnotationTools/gt_files/`
 
 ```bash
 cd SkyDataAnnotationTools
@@ -34,5 +34,5 @@ python3 scripts/run_skdata_challenge.py
 
 
 ## Resources
-- download data folder from [data](https://www.skydata.ai/)
+- download data folder from [data](https://drive.google.com/drive/folders/1TjyGmMsLRCY44EZbhvwA2_rbdu7orkzE?usp=sharing)
 
