@@ -32,3 +32,7 @@ python3 generate_fake_submission.py
 python3 scripts/run_skdata_challenge.py 
 ```
 
+
+## Resources
+- download data folder from [data](https://www.skydata.ai/)
+

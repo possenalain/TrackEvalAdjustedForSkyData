@@ -1,8 +1,11 @@
+import sys
 import json
 import os
 from pycocotools import mask as mask_utils
 import random
 import numpy as np 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+#print(f"debugging info : {os.path.dirname(os.path.dirname(os.path.abspath(__file__)))}")
 
 def defaultEncoder(obj):
     if type(obj).__module__ == np.__name__:
@@ -16,7 +19,7 @@ def defaultEncoder(obj):
 
 class SkyDataDataset():
 
-    def __init__(self, dataset_path="./gt_files/",gt_filename="train_SKYVOS.json"):
+    def __init__(self, dataset_path="./SkyDataAnnotationTools/gt_files/",gt_filename="train_SKYVOS.json"):
         self.gt_fol = dataset_path
         self.sampled_fake_submission = []
 
@@ -70,7 +73,8 @@ class SkyDataDataset():
             if j == n:
                 break
     
-    def save_fake_submission(self, filename="fake_submission_from_gt.json"):
+    def save_fake_submission(self, n=20):
+        filename=f"./SkyDataAnnotationTools/fake_submission_from_gt_{n}.json"
         with open(filename, 'w') as f:
             json.dump(self.sampled_fake_submission, f,default=defaultEncoder)
 
@@ -79,8 +83,8 @@ class SkyDataDataset():
 if __name__ == "__main__":
 
     SkyDataDataset=SkyDataDataset()
-    SkyDataDataset._prepare_n_annotations_from_gt(n=20)
-    SkyDataDataset.save_fake_submission()
+    SkyDataDataset._prepare_n_annotations_from_gt(n=1000)
+    SkyDataDataset.save_fake_submission(n=1000)
 
 
 
