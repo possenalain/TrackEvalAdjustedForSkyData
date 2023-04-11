@@ -15,4 +15,7 @@ error_log.txt
 venv
 *.json
 venv
+*.zip
+
+
 
