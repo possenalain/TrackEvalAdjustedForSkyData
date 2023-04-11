@@ -14,3 +14,5 @@ data
 error_log.txt
 venv
 *.json
+venv
+
