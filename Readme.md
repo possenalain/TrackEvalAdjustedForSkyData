@@ -29,7 +29,7 @@ python3 generate_fake_submission.py
 ## Evaluation
 
 ```bash
-python3 scripts/run_skdata_challenge.py 
+python3 scripts/run_skydata_challenge.py 
 ```
 
 

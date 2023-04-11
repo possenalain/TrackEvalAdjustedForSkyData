@@ -39,6 +39,9 @@ class Skydata(_BaseDataset):
 
         self.gt_fol = self.config['GT_FOLDER'] + 'skydata'
         self.tracker_fol = self.config['TRACKERS_FOLDER'] + 'skydata' 
+        
+        print("self.gt_fol: ", self.gt_fol)
+        print("self.tracker_fol: ", self.tracker_fol)
 
         self.use_super_categories = False
         self.should_classes_combine = True
