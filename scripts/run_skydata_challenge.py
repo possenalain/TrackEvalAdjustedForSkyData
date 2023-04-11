@@ -51,6 +51,7 @@ if __name__ == '__main__':
     default_eval_config['PRINT_ONLY_COMBINED'] = True
     default_dataset_config = trackeval.datasets.Skydata.get_default_dataset_config()
     default_metrics_config = {'METRICS': ['TrackMAP', 'HOTA', 'CLEAR', 'Identity']}
+    # default_metrics_config = {'METRICS': ['HOTA', 'CLEAR', 'Identity']}
     config = {**default_eval_config, **default_dataset_config, **default_metrics_config}  # Merge default configs
     parser = argparse.ArgumentParser()
     for setting in config.keys():
@@ -90,9 +91,9 @@ if __name__ == '__main__':
             if metric == trackeval.metrics.TrackMAP:
                 default_track_map_config = metric.get_default_metric_config()
                 default_track_map_config['USE_TIME_RANGES'] = False
-                default_track_map_config['AREA_RANGES'] = [[0 ** 2, 128 ** 2],
-                                                           [ 128 ** 2, 256 ** 2],
-                                                           [256 ** 2, 1e5 ** 2]]
+                default_track_map_config['AREA_RANGES'] = [[0 ** 2, 12 ** 2],
+                                                           [ 12 ** 2, 22 ** 2],
+                                                           [22 ** 2, 32 ** 2]]
                 metrics_list.append(metric(default_track_map_config))
             else:
                 metrics_list.append(metric())
