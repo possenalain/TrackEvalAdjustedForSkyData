@@ -97,10 +97,11 @@ def write_summary_results(summaries, cls, output_folder):
     fields = list(default_ordered_dict.keys())
     values = list(default_ordered_dict.values())
 
-    out_file = os.path.join(output_folder, cls + '_summary.txt')
+    out_file = os.path.join(output_folder, cls + '_summary.csv')
     os.makedirs(os.path.dirname(out_file), exist_ok=True)
     with open(out_file, 'w', newline='') as f:
-        writer = csv.writer(f, delimiter=' ')
+        # writer = csv.writer(f, delimiter=' ')
+        writer = csv.writer(f)
         writer.writerow(fields)
         writer.writerow(values)
 
@@ -120,6 +121,55 @@ def write_detailed_results(details, cls, output_folder):
             writer.writerow([seq] + sum([list(s[seq].values()) for s in details], []))
         writer.writerow(['COMBINED'] + sum([list(s['COMBINED_SEQ'].values()) for s in details], []))
 
+############################### IN LAB ############################### 
+def extract_necessary_summary(summaries, cls, output_folder,details):
+    #TODO: add a function that extracts the necessary summary from the detailed results
+    """Write summary results to file"""
+
+    fields = sum([list(s.keys()) for s in summaries], [])
+    values = sum([list(s.values()) for s in summaries], [])
+
+    default_order = ['HOTA', 'DetA', 'AssA', 'DetRe', 'DetPr', 'AssRe', 'AssPr', 'LocA', 'OWTA', 'HOTA(0)', 'LocA(0)',
+                     'HOTALocA(0)', 'MOTA', 'MOTP', 'MODA', 'CLR_Re', 'CLR_Pr', 'MTR', 'PTR', 'MLR', 'CLR_TP', 'CLR_FN',
+                     'CLR_FP', 'IDSW', 'MT', 'PT', 'ML', 'Frag', 'sMOTA', 'IDF1', 'IDR', 'IDP', 'IDTP', 'IDFN', 'IDFP',
+                     'Dets', 'GT_Dets', 'IDs', 'GT_IDs']
+    default_ordered_dict = OrderedDict(zip(default_order, [None for _ in default_order]))
+    for f, v in zip(fields, values):
+        default_ordered_dict[f] = v
+    for df in default_order:
+        if default_ordered_dict[df] is None:
+            del default_ordered_dict[df]
+    fields = list(default_ordered_dict.keys())
+    values = list(default_ordered_dict.values())
+
+    
+
+    ## second half
+    # sequences = details[0].keys()
+    n_fds=["AP_all___50","AP_all___75","AP_all___95"]
+    detailed_fields =  sum([list([s for s in n_fds])], [])
+    detailed_values= sum([list([s['COMBINED_SEQ'].get(nf) for nf in n_fds if nf in s['COMBINED_SEQ']]) for s in details], [])
+
+    fields = fields + detailed_fields
+    values = values + detailed_values
+
+    ##############
+
+    out_file = os.path.join(output_folder, '_AllResultsSummaryBoiledDown.csv')
+    os.makedirs(os.path.dirname(out_file), exist_ok=True)
+    with open(out_file, 'w', newline='') as f:
+        # writer = csv.writer(f, delimiter=' ')
+        writer = csv.writer(f)
+        writer.writerow(fields)
+        writer.writerow(values)
+
+
+
+
+
+
+#######################
+ 
 
 def load_detail(file):
     """Loads detailed data for a tracker."""

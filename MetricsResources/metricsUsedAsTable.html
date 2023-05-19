@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Metrics Used as Table</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <div class="jumbotron">
+        
+    <table class="table table-striped">
+        <tbody>
+          <tr>
+            <th>Measure</th>
+            <th>Perfect</th>
+            <th>Description</th>
+          </tr>
+          <!-- Counts-->
+
+          <tr>
+            <td>Dets</td>
+            <td></td>
+            <td>number of tracker dectections</td>
+        </tr> 
+        <tr>
+            <td>GT_Dets</td>
+            <td></td>
+            <td>number of ground truth detections</td>
+        </tr> 
+        <tr>
+            <td>IDs</td>
+            <td></td>
+            <td>number of tracker ids</td>
+        </tr> 
+        <tr>
+            <td>GT_IDs</td>
+            <td></td>
+            <td>number of ground truth ids</td>
+        </tr> 
+       <!-- CLEAR MOT-->
+        <tr>
+            <td>MOTA</td>
+            <td>100%</td>
+            <td>Multi-Object Tracking Accuracy (+/- denotes standard deviation across all sequences) [1]. This measure combines three error sources: false positives, missed targets and identity switches</td>
+        </tr> 
+        <tr>
+            <td>MOTP</td>
+            <td>100%</td>
+            <td>Multi-Object Detection Precision . The misalignment between the annotated and the predicted bounding boxes.</td>
+        </tr> 
+        <tr>
+            <td>MODA</td>
+            <td>100%</td>
+            <td>Multi-Object Detection Accuracy . This measure combines false positives and missed targets.</td>
+        </tr> 
+        <tr>
+            <td>sMOTA</td>
+            <td></td>
+            <td></td>
+       </tr>
+        <tr>
+            <td>CLR_Re</td>
+            <td>100%</td>
+            <td>Ratio of correct detections to total number of GT boxes.</td>
+        </tr> 
+        <tr>
+            <td>CLR_Pr</td>
+            <td>100%</td>
+            <td>precision: ratio of TP / (TP+FP).</td>
+        </tr> 
+        <tr>
+            <td>MTR</td>
+            <td></td>
+            <td></td>
+        </tr> 
+        <tr>
+            <td>PTR</td>
+            <td></td>
+            <td></td>
+        </tr> 
+        <tr>
+            <td>MLR</td>
+            <td></td>
+            <td></td>
+        </tr> 
+        <tr>
+            <td>CLR_TP</td>
+            <td>#gt_count</td>
+            <td>The total number of true positives.</td>
+        </tr> 
+        <tr>
+            <td>CLR_FN</td>
+            <td>0</td>
+            <td>The total number of false negatives (missed targets).</td>
+        </tr> 
+        <tr>
+            <td>CLR_FP</td>
+            <td>0</td>
+            <td>The total number of false positives.</td>
+        </tr> 
+        <tr>
+            <td>IDSW</td>
+            <td>0</td>
+            <td>Number of Identity Switches (ID switch ratio = #ID switches / recall). Please note that we follow the stricter definition of identity switches as described in the reference</td>
+        </tr> 
+        <tr>
+            <td>MT</td>
+            <td>100%</td>
+            <td>Mostly tracked targets. The ratio of ground-truth trajectories that are covered by a track hypothesis for at least 80% of their respective life span.</td>
+        </tr> 
+        <tr>
+            <td>PT</td>
+            <td></td>
+            <td></td>
+        </tr> 
+        <tr>
+            <td>ML</td>
+            <td>0%</td>
+            <td>Mostly lost targets. The ratio of ground-truth trajectories that are covered by a track hypothesis for at most 20% of their respective life span.</td>
+        </tr> 
+        <tr>
+            <td>Frag</td>
+            <td>0</td>
+            <td>The total number of times a trajectory is fragmented (i.e. interrupted during tracking).</td>
+        </tr> 
+
+        <!-- HOTA-->
+        <tr>
+            <td>HOTA</td>
+            <td>100%</td>
+            <td>Higher Order Tracking Accuracy. Geometric mean of detection accuracy and association accuracy. Averaged across localization thresholds.</td>
+        </tr> 
+         <tr>
+            <td>DetA</td>
+            <td>100%</td>
+            <td>Detection Accuracy. Detection Jaccard index averaged over localization thresholds.</td>
+        </tr> 
+         <tr>
+            <td>AssA</td>
+            <td>100%</td>
+            <td>Association Accuracy. Association Jaccard index averaged over all matching detections and then averaged over localization thresholds</td>
+        </tr> 
+         <tr>
+            <td>DetRe</td>
+            <td>100%</td>
+            <td>Detection Recall. TP /(TP + FN) averaged over localization thresholds.</td>
+        </tr> 
+         <tr>
+            <td>AssRe</td>
+            <td>100%</td>
+            <td>Association Recall. TPA / (TPA + FNA) averaged over all matching detections and then averaged over localization thresholds.</td>
+        </tr> 
+         <tr>
+            <td>AssPr</td>
+            <td>100%</td>
+            <td>Association Precision. TPA / (TPA + FPA) averaged over all matching detections and then averaged over localization thresholds.</td>
+        </tr> 
+        <tr>
+            <td>DetPr</td>
+            <td>100%</td>
+            <td>Detection Precisio. TP /(TP + FP) averaged over localization thresholds.<td>
+        </tr>
+         <tr>
+            <td>LocA</td>
+            <td>100%</td>
+            <td>Localization Accuracy. Average localization similarity averaged over all matching detections and averaged over localization thresholds.</td>
+        </tr> 
+         <tr>
+            <td>HOTA(0) </td>
+            <td></td>
+            <td></td>
+        </tr> 
+         <tr>
+            <td>LocA(0) </td>
+            <td></td>
+            <td></td>
+        </tr> 
+          <tr>
+            <td>HOTALocA(0)  </td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <!--Identity  -->
+        <tr>
+            <td>IDTP</td>
+            <td>#dets</td>
+            <td>Identity true positives. All tracker detections that are associated in frame f-1 and frame  f</td>
+        </tr>
+        <tr>
+            <td>IDFN</td>
+            <td>0</td>
+            <td>Identity False Negatives.</td>
+        </tr>
+        <tr>
+            <td>IDFP</td>
+            <td>0</td>
+            <td>Identity false positives. All tracker detections that are left unmatched after association ::usually done with hungarian algorithm</td>
+        </tr>
+        <tr>
+            <td>IDF1</td>
+            <td>100%</td>
+            <td>ID F1 Score. The ratio of correctly identified detections over the average number of ground-truth and computed detections.</td>
+        </tr>
+        <tr>
+            <td>IDR</td>
+            <td>1</td>
+            <td>Identity Recall IDR= IDTP / (IDTP+IDFN)</td>
+        </tr>
+        <tr>
+            <td>IDP</td>
+            <td>1</td>
+            <td>Identity Precision IDP= IDTP / (IDTP+IDFP)</td>
+        </tr>
+        
+        <!--Track MAP -->
+        <tr>
+            <td>AP_all</td>
+            <td>1</td>
+            <td>Average Precision taken over a set of reference recall values (0:0.1:1)</td>
+        </tr> 
+       <tr>
+            <td>AP_area_s</td>
+            <td>1</td>
+            <td>Average Precision at IoU threshold of 0.5 for objects with average area less than ----- pixels.</td>
+        </tr> 
+       <tr>
+            <td>AP_area_m</td>
+            <td>1</td>
+            <td>Average Precision at IoU threshold of 0.5 for objects with average area less than ---- pixels.</td>
+        </tr> 
+       <tr>
+            <td>AP_area_l</td>
+            <td>1</td>
+            <td>Average Precision at IoU threshold of 0.5 for objects with average area less than -------- pixels.</td>
+        </tr> 
+       <tr>
+            <td>AR_all</td>
+            <td></td>
+            <td>Average Recall for all areas</td>
+        </tr> 
+       <tr>
+            <td>AR_area_s</td>
+            <td></td>
+            <td>Average Recall for small areas</td>
+        </tr> 
+       <tr>
+            <td>AR_area_m</td>
+            <td></td>
+            <td>Average Recall for medium areas</td>
+        </tr> 
+       <tr>
+            <td>AR_area_l</td>
+            <td></td>
+            <td>Average Recall for large areas</td>
+        </tr> 
+       
+        </tbody>
+      </table>
+
+    </div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</html>

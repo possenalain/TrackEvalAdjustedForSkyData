@@ -180,9 +180,13 @@ class Evaluator:
                                     metric.plot_single_tracker_results(table_res, tracker_display_name, c_cls,
                                                                        output_fol)
                             if config['OUTPUT_SUMMARY']:
-                                utils.write_summary_results(summaries, c_cls, output_fol)
+                                # utils.write_summary_results(summaries, c_cls, output_fol)
+                                pass
                             if config['OUTPUT_DETAILED']:
-                                utils.write_detailed_results(details, c_cls, output_fol)
+                                # utils.write_detailed_results(details, c_cls, output_fol)
+                                pass
+                            if config['OUTPUT_DETAILED'] and c_cls=="cls_comb_cls_av":
+                                utils.extract_necessary_summary(summaries, c_cls, output_fol,details)
 
                     # Output for returning from function
                     output_res[dataset_name][tracker] = res

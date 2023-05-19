@@ -14,9 +14,9 @@ class TrackMAP(_BaseMetric):
         """Default class config values"""
         default_config = {
             'USE_AREA_RANGES': True,  # whether to evaluate for certain area ranges
-            'AREA_RANGES': [[0 ** 2, 32 ** 2],  # additional area range sets for which TrackMAP is evaluated
-                            [32 ** 2, 96 ** 2],  # (all area range always included), default values for TAO
-                            [96 ** 2, 1e5 ** 2]],  # evaluation
+            'AREA_RANGES': [[0 ** 2, 12 ** 2],  # additional area range sets for which TrackMAP is evaluated
+                            [12 ** 2, 22 ** 2],  # (all area range always included), default values for TAO
+                            [22 ** 2, 32 ** 2]],  # evaluation
             'AREA_RANGE_LABELS': ["area_s", "area_m", "area_l"],  # the labels for the area ranges
             'USE_TIME_RANGES': True,  # whether to evaluate for certain time ranges (length of tracks)
             'TIME_RANGES': [[0, 3], [3, 10], [10, 1e5]],  # additional time range sets for which TrackMAP is evaluated
